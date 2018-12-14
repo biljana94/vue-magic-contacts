@@ -4,6 +4,13 @@ import { contactsService } from './../services/contacts-service.js';
 export default {
     state: {
         data: [], //lista kontakata
+
+        // pagination: {
+        //     total: 0, //koliko ukupno ima kontakata
+        //     per_page: 10, //koliko kontakata ima po stranici
+        //     current_page: 1, //trenutna stranica
+        // },
+
         total: 0, //koliko ukupno ima kontakata
         per_page: 10, //koliko kontakata ima po stranici
         current_page: 1, //trenutna stranica
@@ -17,6 +24,7 @@ export default {
 
         //prvi nacin
         //{ data, total, per_page, current_page } - raspakovan payload
+        //mutacija sa destruktorom - raspakovan payload
         // SET_CONTACTS(state, { data, total, per_page, current_page }) {
         //     state = {
         //         ...state, //uzimamo ceo state i gazimo njegov data, total, per_page, current_page; raspakovali smo ceo state
@@ -33,7 +41,11 @@ export default {
             state.total = payload.total;
             state.per_page = payload.per_page;
             state.current_page = payload.current_page;
-        }
+        },
+
+        // SET_PAGINATION(state, payload) {
+        //     state.pagination = payload;
+        // },
     },
 
     actions: {
@@ -45,7 +57,7 @@ export default {
             } catch(errors) {
                 context.commit('SET_ERRORS', errors);
             }
-        }
+        },
     },
 
     getters: {
